@@ -136,7 +136,7 @@ document.addEventListener('click',e=>{const tab=e.target.closest('[data-cat-type
   const delta=e.clientY-drag.startY,offset=Math.max(0,delta);
   drag.velocity=(e.clientY-drag.lastY)/dt;
   drag.lastY=e.clientY;drag.lastTime=now;drag.offset=offset;
-  drag.panel.style.transform='translate3d(0,'+offset+'px,0)';
+  drag.panel.style.transform='translate3d(-50%,'+offset+'px,0)';
   if(e.cancelable)e.preventDefault();
  });
  const finish=e=>{
