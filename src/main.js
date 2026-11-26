@@ -1,6 +1,7 @@
 import './styles.css';
 import { openDatabase } from './core/database/indexed-db.js';
 import { calculateAccountBalances, summarizeTransactions, formatRupiah } from './core/finance/ledger.js';
+import { DEFAULT_CATEGORIES } from './core/finance/categories.js';
 
 const $ = (selector, root = document) => root.querySelector(selector);
 const view = $('#view');
@@ -11,9 +12,10 @@ let db;
 let page = 'home';
 let accounts = [];
 let transactions = [];
+let categories = [];
 let toastTimer;
 
-const today = () => new Date().toISOString().slice(0, 10);
+const today = () => { const date = new Date(); date.setMinutes(date.getMinutes() - date.getTimezoneOffset()); return date.toISOString().slice(0, 10); };
 const id = () => crypto.randomUUID();
 const money = (value) => formatRupiah(value);
 const monthStart = () => today().slice(0, 7);
@@ -49,7 +51,7 @@ async function remove(name, key) {
   });
 }
 async function refresh() {
-  [accounts, transactions] = await Promise.all([all('accounts'), all('transactions')]);
+  [accounts, transactions, categories] = await Promise.all([all('accounts'), all('transactions'), all('categories')]);
   accounts.sort((a,b) => a.name.localeCompare(b.name));
   transactions.sort((a,b) => (b.transactionDate || '').localeCompare(a.transactionDate || '') || (b.createdAt || 0) - (a.createdAt || 0));
   render();
@@ -296,6 +298,12 @@ async function importBackup(file) {
 async function start() {
   try {
     db = await openDatabase();
+    const savedCategories = await all('categories');
+    if (!savedCategories.length) {
+      const categoryTx = db.transaction('categories', 'readwrite');
+      DEFAULT_CATEGORIES.forEach((category) => categoryTx.objectStore('categories').put(category));
+      await new Promise((resolve, reject) => { categoryTx.oncomplete = resolve; categoryTx.onerror = () => reject(categoryTx.error); categoryTx.onabort = () => reject(categoryTx.error); });
+    }
     await refresh();
     await ensureDefaultAccount();
     await refresh();
