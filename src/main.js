@@ -96,7 +96,6 @@ function renderHome() {
   const total = [...balances().values()].reduce((a,b) => a + b, 0);
   const recent = transactions.slice(0, 5);
   view.innerHTML = `
-    <section class="greeting"><p class="eyebrow">RINGKASAN KEUANGAN</p><h2>Atur uangmu,<br><span>lebih tenang.</span></h2><p class="muted">Pantau semua pergerakan uang dalam satu tempat.</p></section>
     <section class="hero-card"><div class="card-top"><span>Saldo gabungan</span><button class="text-button" data-action="toggle-balance">Sembunyikan</button></div><strong class="hero-balance" id="balance-value">${money(total)}</strong><div class="hero-bottom"><span>◉ ${accounts.length} dompet aktif</span><span>Offline · tersimpan di perangkat</span></div></section>
     <section class="summary-grid"><article class="summary-card"><span class="summary-icon income">↗</span><small>Pemasukan bulan ini</small><strong class="positive">${money(sums.income)}</strong></article><article class="summary-card"><span class="summary-icon expense">↘</span><small>Pengeluaran bulan ini</small><strong class="negative">${money(sums.expense)}</strong></article></section>
     <section class="section"><div class="section-heading"><div><p class="eyebrow">AKTIVITAS</p><h3>Transaksi terbaru</h3></div><button class="link-button" data-page="transactions">Lihat semua</button></div>
