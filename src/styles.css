@@ -73,3 +73,30 @@ dialog{overscroll-behavior:contain}.picker-sheet{padding-top:11px}.sheet-option.
 @keyframes content-enter{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 @media(hover:hover){.icon-button:hover,.balance-toggle:hover,.sheet-close:hover,.close-modal:hover{background:var(--surface-2);border-color:var(--green)}.quick-actions button:hover,.wallet-row:hover,.picker-trigger:hover,.secondary-button:hover{border-color:color-mix(in srgb,var(--green) 45%,var(--line))}.filter:hover{border-color:var(--green)}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.balance-panel,.wallet-total,.stat-overview,.chart-panel,.budget-summary,.quick-actions,.section{animation:none}}
+
+
+/* Refined home balance card */
+.balance-panel{position:relative;isolation:isolate;overflow:hidden;padding:22px 20px 17px;border-radius:22px;background:var(--surface);box-shadow:0 9px 26px rgba(0,0,0,.055)}
+.balance-panel::after{content:"";position:absolute;z-index:-1;right:-38px;top:-55px;width:170px;height:170px;border:1px solid color-mix(in srgb,var(--green) 18%,transparent);border-radius:50%;box-shadow:0 0 0 18px color-mix(in srgb,var(--green) 4%,transparent),0 0 0 38px color-mix(in srgb,var(--green) 3%,transparent);pointer-events:none}
+.balance-top{position:relative}.balance-toggle{display:grid;place-items:center}.balance-panel>strong{position:relative;margin:17px 0 20px;font-size:clamp(30px,8.2vw,41px);letter-spacing:-.065em}
+.balance-foot{align-items:center;padding-top:12px;border-top:1px solid var(--line)}
+.local-tag{font-size:11px}.cash-summary{gap:14px;margin:20px 2px 21px}.cash-summary>div{gap:7px;padding:0 3px}.metric-label{font-size:11px}
+.quick-actions{gap:9px;margin:5px 0 27px}.quick-actions button{min-height:70px;padding:12px 10px;border-radius:16px;gap:9px}.quick-sign{width:38px;height:38px;border-radius:12px}
+.quick-actions b{font-size:12px}.quick-actions small{font-size:11px}.section-title h3{font-size:17px}
+
+/* Put category management first in Settings without changing the modal markup */
+#modal-content:has(.settings-section [data-action="manage-categories"]){display:flex;flex-direction:column}
+.settings-section:has([data-action="manage-categories"]){order:-1;padding-top:0;border-top:0}
+.settings-section:has([data-action="manage-categories"]) .secondary-button{display:flex;align-items:center;justify-content:center;gap:8px}
+
+/* More consistent category icon tiles */
+.category-option .sheet-option-icon{width:38px;height:38px;border-radius:12px;background:var(--green-soft);color:var(--green)}
+.sheet-option.selected .sheet-option-icon{background:var(--surface);color:var(--green)}
+
+/* Smooth, composited slide-up motion */
+.picker-backdrop{transition:opacity .26s cubic-bezier(.2,.75,.25,1)}
+.picker-sheet{transform:translate3d(0,34px,0);transition:transform .28s cubic-bezier(.22,.78,.2,1);will-change:transform;backface-visibility:hidden}
+.picker-layer.visible .picker-sheet{transform:translate3d(0,0,0)}
+dialog.transaction-sheet{animation:mamoney-sheet-rise .28s cubic-bezier(.22,.78,.2,1) both;will-change:transform}
+@keyframes mamoney-sheet-rise{from{transform:translate3d(0,42px,0)}to{transform:translate3d(0,0,0)}}
+@media(prefers-reduced-motion:reduce){.picker-sheet{will-change:auto;transform:none}.picker-layer.visible .picker-sheet{transform:none}dialog.transaction-sheet{animation:none}}
