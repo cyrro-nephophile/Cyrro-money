@@ -97,7 +97,7 @@ document.addEventListener('click',async e=>{const pick=e.target.closest('[data-p
   const handle=e.target.closest('.sheet-grabber,.sheet-header');
   const panel=sheet();
   if(!handle||!panel||layer.hidden||e.pointerType==='mouse'&&e.button!==0)return;
-  if(e.target.closest('button')&&!e.target.closest('.sheet-header'))return;
+  if(e.target.closest('button'))return;
   drag={id:e.pointerId,startY:e.clientY,lastY:e.clientY,lastTime:performance.now(),velocity:0,offset:0,panel};
   panel.classList.add('is-dragging');
   try{handle.setPointerCapture(e.pointerId)}catch{}
