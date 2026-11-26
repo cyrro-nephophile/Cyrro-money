@@ -1,4 +1,4 @@
-# Cyrro Money
+# Mamoney
 
 A private, offline-first personal finance tracker for Android and the browser.
 
