@@ -278,3 +278,8 @@ dialog#picker-layer .picker-sheet{position:absolute;z-index:1;left:50%;right:aut
 dialog#picker-layer.visible .picker-sheet{transform:translate3d(-50%,0,0)}
 dialog#picker-layer .sheet-options{max-height:calc(82dvh - 112px);overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
 @media(prefers-reduced-motion:reduce){dialog#picker-layer .picker-sheet{transition:none;transform:translate3d(-50%,0,0)}}
+
+
+/* Critical: a closed native dialog must not cover the application. */
+dialog#picker-layer:not([open]){display:none!important;pointer-events:none!important}
+dialog#picker-layer[open]{display:block;pointer-events:auto}
