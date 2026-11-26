@@ -109,3 +109,28 @@ dialog.transaction-sheet{animation:mamoney-sheet-rise .28s cubic-bezier(.22,.78,
 dialog[open]:not(.transaction-sheet){animation:dialog-rise .22s cubic-bezier(.2,.75,.25,1) both}
 @keyframes dialog-rise{from{opacity:0;transform:translate3d(0,12px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
 @media(prefers-reduced-motion:reduce){dialog[open]:not(.transaction-sheet){animation:none}}
+
+
+/* Stable picker gesture: finger tracks the sheet directly, then settles cleanly */
+.sheet-grabber{width:46px;height:5px;margin:2px auto 15px;border-radius:999px;cursor:grab;touch-action:none}
+.sheet-header{touch-action:pan-y}
+.picker-sheet.is-dragging{transition:none!important;will-change:transform}
+.picker-sheet.snap-back{transition:transform .32s cubic-bezier(.18,.78,.22,1)!important;transform:translate3d(0,0,0)!important}
+.picker-layer:not(.visible) .picker-sheet{transform:translate3d(0,100%,0)}
+.picker-layer.visible .picker-sheet:not(.is-dragging):not(.snap-back){transform:translate3d(0,0,0)}
+.picker-sheet{overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.picker-sheet .sheet-options{overscroll-behavior:contain}
+
+/* Settings: one-column, full-width controls with predictable spacing */
+#modal-content:has(.settings-category-entry){display:block}
+#modal-content .settings-section{display:block;box-sizing:border-box;width:100%;min-width:0;padding:16px 0;border-top:1px solid var(--line)}
+#modal-content .settings-category-entry{padding-top:0;border-top:0}
+#modal-content .settings-section .field{display:grid;width:100%;min-width:0;margin:12px 0;gap:7px}
+#modal-content .settings-section .field select{display:block;box-sizing:border-box;width:100%;min-width:0;max-width:100%}
+#modal-content .settings-section .full{display:flex;box-sizing:border-box;align-items:center;justify-content:center;width:100%;min-width:0;min-height:48px;margin:10px 0 0;padding:12px 14px;line-height:1.35;text-align:center;white-space:normal}
+#modal-content .settings-section .file-button{position:relative;cursor:pointer}
+#modal-content .settings-section .file-button input{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden}
+#modal-content .settings-section .helper{margin:6px 0 10px;line-height:1.5}
+#modal-content .settings-section.about{padding-bottom:4px}
+@media(max-width:380px){#modal{width:calc(100% - 20px)}#modal-form{padding:16px}#modal-content .settings-section .full{font-size:12px;padding-inline:10px}}
+@media(prefers-reduced-motion:reduce){.picker-sheet.snap-back{transition:none!important}}
