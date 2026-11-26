@@ -3,27 +3,37 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#f4f6f3" />
+  <meta name="theme-color" content="#f6f7f5" />
   <meta name="description" content="Mamoney — pencatat keuangan pribadi offline." />
+  <meta name="color-scheme" content="light dark" />
   <link rel="manifest" href="/manifest.webmanifest" />
-  <title>Mamoney</title>
+  <title>Mamoney — Personal Finance</title>
 </head>
 <body>
   <div id="app">
     <header class="topbar">
-      <div class="brand"><span class="brand-mark">m</span><div><p class="eyebrow">PERSONAL FINANCE</p><h1>Mamoney</h1></div></div>
-      <button class="icon-button" data-action="settings" aria-label="Pengaturan">⚙</button>
+      <div class="brand" aria-label="Mamoney">
+        <span class="brand-mark" aria-hidden="true">m</span>
+        <div><p class="eyebrow">PERSONAL FINANCE</p><h1>Mamoney</h1></div>
+      </div>
+      <button class="icon-button" type="button" data-action="settings" aria-label="Pengaturan">⚙</button>
     </header>
-    <main id="view" aria-live="polite"><div class="loading">Menyiapkan keuanganmu…</div></main>
+    <main id="view" aria-live="polite" aria-busy="true">
+      <div class="loading">Menyiapkan keuanganmu…</div>
+    </main>
     <nav class="bottom-nav" aria-label="Navigasi utama">
-      <button class="nav-item active" data-page="home"><span>⌂</span>Beranda</button>
-      <button class="nav-item" data-page="transactions"><span>↕</span>Riwayat</button>
-      <button class="nav-item" data-page="accounts"><span>▣</span>Dompet</button>
-      <button class="nav-item" data-page="stats"><span>▥</span>Statistik</button>
+      <button class="nav-item active" type="button" data-page="home"><span aria-hidden="true">⌂</span>Beranda</button>
+      <button class="nav-item" type="button" data-page="transactions"><span aria-hidden="true">↕</span>Riwayat</button>
+      <button class="nav-item" type="button" data-page="accounts"><span aria-hidden="true">▣</span>Dompet</button>
+      <button class="nav-item" type="button" data-page="stats"><span aria-hidden="true">▥</span>Statistik</button>
     </nav>
-    <button class="fab" data-action="add-transaction" aria-label="Tambah transaksi">＋</button>
+    <button class="fab" type="button" data-action="new-tx" aria-label="Tambah transaksi">＋</button>
   </div>
-  <dialog id="modal"><form id="modal-form" method="dialog"><div id="modal-content"></div></form></dialog>
+  <dialog id="modal" aria-label="Dialog Mamoney">
+    <form id="modal-form" method="dialog">
+      <div id="modal-content"></div>
+    </form>
+  </dialog>
   <div id="toast" role="status" aria-live="polite"></div>
   <script type="module" src="/src/main.js"></script>
 </body>
