@@ -2,7 +2,7 @@ import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'id.cyrro.money',
-  appName: 'Cyrro Money',
+  appName: 'Mamoney',
   webDir: 'dist',
   bundledWebRuntime: false,
   android: {
