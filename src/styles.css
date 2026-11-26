@@ -100,3 +100,12 @@ dialog{overscroll-behavior:contain}.picker-sheet{padding-top:11px}.sheet-option.
 dialog.transaction-sheet{animation:mamoney-sheet-rise .28s cubic-bezier(.22,.78,.2,1) both;will-change:transform}
 @keyframes mamoney-sheet-rise{from{transform:translate3d(0,42px,0)}to{transform:translate3d(0,0,0)}}
 @media(prefers-reduced-motion:reduce){.picker-sheet{will-change:auto;transform:none}.picker-layer.visible .picker-sheet{transform:none}dialog.transaction-sheet{animation:none}}
+
+
+/* Category list icons and balanced dialog entrance */
+.manage-category-name{display:flex;align-items:center;gap:10px}
+.manage-category-name>i{display:grid;place-items:center;flex:none;width:34px;height:34px;border-radius:10px;background:var(--surface-2);color:var(--muted);font-style:normal}
+.manage-category-name>span{display:grid;gap:4px}
+dialog[open]:not(.transaction-sheet){animation:dialog-rise .22s cubic-bezier(.2,.75,.25,1) both}
+@keyframes dialog-rise{from{opacity:0;transform:translate3d(0,12px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
+@media(prefers-reduced-motion:reduce){dialog[open]:not(.transaction-sheet){animation:none}}
