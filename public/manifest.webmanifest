@@ -1,0 +1,10 @@
+{
+  "name": "Cyrro Money",
+  "short_name": "Cyrro Money",
+  "description": "Pencatat keuangan pribadi offline.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#101411",
+  "theme_color": "#101411",
+  "lang": "id"
+}
