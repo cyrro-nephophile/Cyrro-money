@@ -1,40 +1,30 @@
 <!doctype html>
 <html lang="id">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="theme-color" content="#101411" />
-    <meta name="description" content="Cyrro Money — pencatat keuangan pribadi offline." />
-    <link rel="manifest" href="/manifest.webmanifest" />
-    <title>Cyrro Money</title>
-  </head>
-  <body>
-    <div id="app">
-      <header class="topbar">
-        <div>
-          <p class="eyebrow">PERSONAL FINANCE</p>
-          <h1>Cyrro Money</h1>
-        </div>
-        <span class="status" aria-label="Mode offline">Offline-first</span>
-      </header>
-      <main>
-        <section class="welcome">
-          <p class="eyebrow">RUANG KEUANGANMU</p>
-          <h2>Lebih jelas mengelola uang.</h2>
-          <p class="muted">Fondasi aplikasi sudah siap. Fitur transaksi, dompet, anggaran, dan statistik akan dibangun bertahap.</p>
-          <div class="balance-card">
-            <span class="muted">Saldo gabungan</span>
-            <strong id="demo-balance">Rp0</strong>
-            <small>Belum ada transaksi</small>
-          </div>
-        </section>
-        <section class="quick-grid" aria-label="Ringkasan">
-          <article><span class="muted">Pemasukan bulan ini</span><strong>Rp0</strong></article>
-          <article><span class="muted">Pengeluaran bulan ini</span><strong>Rp0</strong></article>
-        </section>
-        <p class="footnote" id="app-status">Menyiapkan penyimpanan lokal…</p>
-      </main>
-    </div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#101411" />
+  <meta name="description" content="Cyrro Money — pencatat keuangan pribadi offline." />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <title>Cyrro Money</title>
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">c</span><div><p class="eyebrow">PERSONAL FINANCE</p><h1>Cyrro Money</h1></div></div>
+      <button class="icon-button" data-action="settings" aria-label="Pengaturan">⚙</button>
+    </header>
+    <main id="view" aria-live="polite"><div class="loading">Menyiapkan keuanganmu…</div></main>
+    <nav class="bottom-nav" aria-label="Navigasi utama">
+      <button class="nav-item active" data-page="home"><span>⌂</span>Beranda</button>
+      <button class="nav-item" data-page="transactions"><span>↕</span>Transaksi</button>
+      <button class="nav-item" data-page="stats"><span>▥</span>Statistik</button>
+      <button class="nav-item" data-page="accounts"><span>▣</span>Dompet</button>
+    </nav>
+    <button class="fab" data-action="add-transaction" aria-label="Tambah transaksi">＋</button>
+  </div>
+  <dialog id="modal"><form id="modal-form" method="dialog"><div id="modal-content"></div></form></dialog>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="/src/main.js"></script>
+</body>
 </html>
