@@ -21,28 +21,20 @@ export function openDatabase() {
       const db = request.result;
       createStore(db, 'metadata', { keyPath: 'key' });
 
-      const accounts = createStore(db, 'accounts', { keyPath: 'id' });
-      if (accounts) {
-        accounts.createIndex('by_name', 'name', { unique: false });
+      const accounts = createStore(db, 'accounts', { keyPath: 'id' }) || request.transaction.objectStore('accounts');
+      if (!accounts.indexNames.contains('by_name')) accounts.createIndex('by_name', 'name', { unique: false });
+
+      const transactions = createStore(db, 'transactions', { keyPath: 'id' }) || request.transaction.objectStore('transactions');
+      for (const [name, keyPath] of [['by_date', 'transactionDate'], ['by_account', 'accountId'], ['by_type', 'type'], ['by_category', 'categoryId']]) {
+        if (!transactions.indexNames.contains(name)) transactions.createIndex(name, keyPath, { unique: false });
       }
 
-      const transactions = createStore(db, 'transactions', { keyPath: 'id' });
-      if (transactions) {
-        transactions.createIndex('by_date', 'transactionDate', { unique: false });
-        transactions.createIndex('by_account', 'accountId', { unique: false });
-        transactions.createIndex('by_type', 'type', { unique: false });
-        transactions.createIndex('by_category', 'categoryId', { unique: false });
-      }
+      const categories = createStore(db, 'categories', { keyPath: 'id' }) || request.transaction.objectStore('categories');
+      if (!categories.indexNames.contains('by_type')) categories.createIndex('by_type', 'type', { unique: false });
 
-      const categories = createStore(db, 'categories', { keyPath: 'id' });
-      if (categories) {
-        categories.createIndex('by_type', 'type', { unique: false });
-      }
-
-      const budgets = createStore(db, 'budgets', { keyPath: 'id' });
-      if (budgets) {
-        budgets.createIndex('by_period', 'period', { unique: false });
-        budgets.createIndex('by_category', 'categoryId', { unique: false });
+      const budgets = createStore(db, 'budgets', { keyPath: 'id' }) || request.transaction.objectStore('budgets');
+      for (const [name, keyPath] of [['by_period', 'period'], ['by_category', 'categoryId']]) {
+        if (!budgets.indexNames.contains(name)) budgets.createIndex(name, keyPath, { unique: false });
       }
 
       createStore(db, 'settings', { keyPath: 'key' });
