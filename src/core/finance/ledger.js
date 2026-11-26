@@ -87,7 +87,9 @@ export function summarizeTransactions(transactions) {
     throw new RangeError('Total transaksi melebihi batas angka aman JavaScript.');
   }
 
-  return { income, expense, net: income - expense };
+  const net = income - expense;
+  if (!Number.isSafeInteger(net)) throw new RangeError('Arus kas bersih melebihi batas angka aman JavaScript.');
+  return { income, expense, net };
 }
 
 export function formatRupiah(amount, options = {}) {

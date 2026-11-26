@@ -1,31 +1,38 @@
-const CACHE_NAME = 'cyrro-money-shell-v1';
+const CACHE_NAME = 'mamoney-shell-v2';
 const APP_SHELL = ['/', '/manifest.webmanifest'];
-
-self.addEventListener('install', (event) => {
-  event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL)));
+self.addEventListener('install', event => {
+  event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(APP_SHELL)));
   self.skipWaiting();
 });
-
-self.addEventListener('activate', (event) => {
-  event.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key)))
-    )
-  );
-  self.clients.claim();
+self.addEventListener('activate', event => {
+  event.waitUntil((async () => {
+    const keys = await caches.keys();
+    await Promise.all(keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key)));
+    await self.clients.claim();
+  })());
 });
-
-self.addEventListener('fetch', (event) => {
+self.addEventListener('fetch', event => {
   const request = event.request;
   if (request.method !== 'GET' || new URL(request.url).origin !== self.location.origin) return;
-
-  event.respondWith(
-    fetch(request).then((response) => {
-      if (response.ok && request.destination !== 'document') {
-        const copy = response.clone();
-        caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
+  if (request.mode === 'navigate') {
+    event.respondWith((async () => {
+      try {
+        const response = await fetch(request);
+        if (response.ok) (await caches.open(CACHE_NAME)).put('/', response.clone());
+        return response;
+      } catch {
+        return (await caches.match(request)) || (await caches.match('/'));
       }
+    })());
+    return;
+  }
+  event.respondWith((async () => {
+    try {
+      const response = await fetch(request);
+      if (response.ok && ['script','style','image','font'].includes(request.destination)) (await caches.open(CACHE_NAME)).put(request, response.clone());
       return response;
-    }).catch(() => caches.match(request).then((cached) => cached || caches.match('/')))
-  );
+    } catch {
+      return (await caches.match(request)) || Response.error();
+    }
+  })());
 });
