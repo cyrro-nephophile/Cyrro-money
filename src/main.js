@@ -271,17 +271,17 @@ document.addEventListener('change', async (event) => {
   if (event.target.matches('[data-action="import"]')) importBackup(event.target.files?.[0]);
 });
 async function exportBackup() {
-  const data = { app:'Cyrro Money', schemaVersion:1, exportedAt:new Date().toISOString(), accounts, transactions };
+  const data = { app:'Mamoney', schemaVersion:1, exportedAt:new Date().toISOString(), accounts, transactions };
   const blob = new Blob([JSON.stringify(data,null,2)], {type:'application/json'});
   const url = URL.createObjectURL(blob);
-  const anchor = document.createElement('a'); anchor.href=url; anchor.download=`cyrro-money-backup-${today()}.json`; anchor.click();
+  const anchor = document.createElement('a'); anchor.href=url; anchor.download=`mamoney-backup-${today()}.json`; anchor.click();
   URL.revokeObjectURL(url); showToast('Cadangan data dibuat.');
 }
 async function importBackup(file) {
   if (!file) return;
   try {
     const data = JSON.parse(await file.text());
-    if (data.app !== 'Cyrro Money' || data.schemaVersion !== 1 || !Array.isArray(data.accounts) || !Array.isArray(data.transactions)) throw new Error('Format cadangan tidak dikenali.');
+    if (!['Mamoney', 'Cyrro Money'].includes(data.app) || data.schemaVersion !== 1 || !Array.isArray(data.accounts) || !Array.isArray(data.transactions)) throw new Error('Format cadangan tidak dikenali.');
     calculateAccountBalances(data.accounts, data.transactions);
     if (!confirm('Pulihkan cadangan? Data dompet dan transaksi saat ini akan diganti.')) return;
     const tx = db.transaction(['accounts','transactions'], 'readwrite');
