@@ -100,7 +100,8 @@ document.addEventListener('click',async e=>{const pick=e.target.closest('[data-p
   if(e.target.closest('button'))return;
   drag={id:e.pointerId,startY:e.clientY,lastY:e.clientY,lastTime:performance.now(),velocity:0,offset:0,panel};
   panel.classList.add('is-dragging');
-  try{handle.setPointerCapture(e.pointerId)}catch{}
+  if(e.cancelable)e.preventDefault();
+  try{layer.setPointerCapture(e.pointerId)}catch{}
  });
  layer.addEventListener('pointermove',e=>{
   if(!drag||e.pointerId!==drag.id)return;
@@ -126,6 +127,7 @@ document.addEventListener('click',async e=>{const pick=e.target.closest('[data-p
  };
  layer.addEventListener('pointerup',finish);
  layer.addEventListener('pointercancel',finish);
+ layer.addEventListener('lostpointercapture',finish);
 })();
 $('#modal-form').addEventListener('submit',async e=>{if($('#modal-form').querySelector('[data-budget-id]')){e.preventDefault();await saveBudget()}else await submitModal(e)});
 $('#modal').addEventListener('click',e=>{if(e.target===modal)closeModal()});$('#modal').addEventListener('close',()=>{const f=$('#modal-form');f.reset();delete f.dataset.editingId;unlockPageScroll()});
