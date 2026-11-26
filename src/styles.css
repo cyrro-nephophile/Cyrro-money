@@ -115,7 +115,7 @@ dialog[open]:not(.transaction-sheet){animation:dialog-rise .22s cubic-bezier(.2,
 .sheet-grabber{width:46px;height:5px;margin:2px auto 15px;border-radius:999px;cursor:grab;touch-action:none}
 .sheet-header{touch-action:none;cursor:grab}
 .picker-sheet.is-dragging{transition:none!important;will-change:transform}
-.picker-sheet.snap-back{transition:transform .32s cubic-bezier(.18,.78,.22,1)!important;transform:translate3d(0,0,0)!important}
+.picker-sheet.snap-back{transition:transform .32s cubic-bezier(.18,.78,.22,1)!important;transform:translate3d(-50%,0,0)!important}
 .picker-layer:not(.visible) .picker-sheet{transform:translate3d(0,100%,0)}
 .picker-layer.visible .picker-sheet:not(.is-dragging):not(.snap-back){transform:translate3d(0,0,0)}
 .picker-sheet{overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
