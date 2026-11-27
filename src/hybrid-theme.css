@@ -886,3 +886,15 @@ dialog[open]::backdrop{animation:mamoney-backdrop-in .2s ease-out both}
 #modal-content .field>span{
   color:var(--muted);
 }
+
+
+/* Transaction form: clear green active state while entering values. */
+#modal-content .amount-input:focus,
+#modal-content .field input:focus,
+#modal-content .field select:focus,
+#modal-content .budget-input-row input:focus,
+#modal-content .sheet-date-wrap input:focus{
+  border-color:var(--green);
+  background:var(--green-soft);
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--green) 16%,transparent);
+}
