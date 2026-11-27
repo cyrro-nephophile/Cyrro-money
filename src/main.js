@@ -80,7 +80,7 @@ async function importBackup(file){
   if(d.accounts.some(a=>typeof a.name!=='string'||!a.name.trim()||!Number.isSafeInteger(a.openingBalance)))throw Error('Data dompet tidak valid.');
   const categoryMap=new Map(d.categories.map(c=>[c.id,c]));
   for(const c of d.categories){if(!['income','expense'].includes(c.type)||typeof c.name!=='string'||!c.name.trim()||c.name.length>40)throw Error('Data kategori tidak valid.')}
-  const validDate=v=>{if(typeof v!=='string'||!/^\\d{4}-\\d{2}-\\d{2}$/.test(v))return false;const [y,mo,day]=v.split('-').map(Number),date=new Date(Date.UTC(y,mo-1,day));return date.getUTCFullYear()===y&&date.getUTCMonth()===mo-1&&date.getUTCDate()===day};
+  const validDate=v=>{if(typeof v!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(v))return false;const [y,mo,day]=v.split('-').map(Number),date=new Date(Date.UTC(y,mo-1,day));return date.getUTCFullYear()===y&&date.getUTCMonth()===mo-1&&date.getUTCDate()===day};
   for(const t of d.transactions){
    if(!['income','expense','transfer'].includes(t.type)||!Number.isSafeInteger(t.amount)||t.amount<=0||!accountIds.has(t.accountId)||!validDate(t.transactionDate))throw Error('Data transaksi tidak valid.');
    if(t.type==='transfer'){if(!accountIds.has(t.destinationAccountId)||t.destinationAccountId===t.accountId)throw Error('Dompet transfer tidak valid.')}
