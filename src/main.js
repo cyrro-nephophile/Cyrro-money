@@ -85,7 +85,7 @@ async function importBackup(file){
   if(d.accounts.some(a=>typeof a.name!=='string'||!a.name.trim()||a.name.length>60||!Number.isSafeInteger(a.openingBalance)))throw Error('Data dompet tidak valid.');
   const categoryMap=new Map(d.categories.map(c=>[c.id,c])),categoryNames=new Set();
   for(const c of d.categories){if(!['income','expense'].includes(c.type)||typeof c.name!=='string'||!c.name.trim()||c.name.length>40||(c.isArchived!=null&&typeof c.isArchived!=='boolean'))throw Error('Data kategori tidak valid.');const key=c.type+':'+c.name.trim().toLocaleLowerCase('id-ID');if(categoryNames.has(key))throw Error('Nama kategori duplikat.');categoryNames.add(key)}
-  const validDate=v=>{if(typeof v!=='string'||!/^\\d{4}-\\d{2}-\\d{2}$/.test(v))return false;const [y,mo,day]=v.split('-').map(Number),date=new Date(Date.UTC(y,mo-1,day));return date.getUTCFullYear()===y&&date.getUTCMonth()===mo-1&&date.getUTCDate()===day};
+  const validDate=v=>{if(typeof v!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(v))return false;const [y,mo,day]=v.split('-').map(Number),date=new Date(Date.UTC(y,mo-1,day));return date.getUTCFullYear()===y&&date.getUTCMonth()===mo-1&&date.getUTCDate()===day};
   for(const t of d.transactions){
    if(!['income','expense','transfer'].includes(t.type)||!Number.isSafeInteger(t.amount)||t.amount<=0||!accountIds.has(t.accountId)||!validDate(t.transactionDate))throw Error('Data transaksi tidak valid.');
    if(t.type==='transfer'){if(!accountIds.has(t.destinationAccountId)||t.destinationAccountId===t.accountId||t.categoryId!=null)throw Error('Dompet transfer tidak valid.')}
@@ -93,7 +93,7 @@ async function importBackup(file){
    if(t.note!=null&&typeof t.note!=='string')throw Error('Catatan transaksi tidak valid.');
   }
   const budgetPeriods=new Set(),budgetTotals=new Map();
-  for(const b of d.budgets){if(!categoryIds.has(b.categoryId)||typeof b.period!=='string'||!/^\\d{4}-(0[1-9]|1[0-2])$/.test(b.period)||!Number.isSafeInteger(b.amount)||b.amount<=0||categoryMap.get(b.categoryId)?.type!=='expense')throw Error('Data anggaran tidak valid.');const key=b.categoryId+':'+b.period;if(budgetPeriods.has(key))throw Error('Ada anggaran kategori yang duplikat pada bulan yang sama.');budgetPeriods.add(key);const total=(budgetTotals.get(b.period)||0)+b.amount;if(!Number.isSafeInteger(total))throw Error('Total anggaran melebihi batas angka aman.');budgetTotals.set(b.period,total)}
+  for(const b of d.budgets){if(!categoryIds.has(b.categoryId)||typeof b.period!=='string'||!/^\d{4}-(0[1-9]|1[0-2])$/.test(b.period)||!Number.isSafeInteger(b.amount)||b.amount<=0||categoryMap.get(b.categoryId)?.type!=='expense')throw Error('Data anggaran tidak valid.');const key=b.categoryId+':'+b.period;if(budgetPeriods.has(key))throw Error('Ada anggaran kategori yang duplikat pada bulan yang sama.');budgetPeriods.add(key);const total=(budgetTotals.get(b.period)||0)+b.amount;if(!Number.isSafeInteger(total))throw Error('Total anggaran melebihi batas angka aman.');budgetTotals.set(b.period,total)}
   if(d.settings!=null&&(typeof d.settings!=='object'||!['system','light','dark'].includes(d.settings.theme)||!['id','en'].includes(d.settings.language)))throw Error('Pengaturan cadangan tidak valid.');
   calculateAccountBalances(d.accounts,d.transactions);
   if(!confirm('Pulihkan cadangan? Seluruh data Mamoney saat ini akan diganti.'))return;
