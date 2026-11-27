@@ -1,0 +1,131 @@
+/* Mamoney Hybrid UI — first visible design pass */
+:root{
+  --bg:#f3f6f3;
+  --surface:rgba(255,255,255,.88);
+  --surface-2:#eaf0eb;
+  --text:#17231b;
+  --muted:#59675e;
+  --line:#dce6de;
+  --green:#16834a;
+  --green-dark:#116b3c;
+  --green-soft:#e0f3e7;
+  --red:#c74643;
+  --red-soft:#fbe9e8;
+  --blue:#286da8;
+  --amber:#94600f;
+  --amber-soft:#fff1d5;
+  --shadow:0 14px 38px rgba(28,62,39,.09);
+  --hybrid-ease:cubic-bezier(.2,.8,.2,1);
+}
+:root[data-theme=dark]{
+  --bg:#080d0a;
+  --surface:rgba(19,27,22,.92);
+  --surface-2:#202c24;
+  --text:#f1f7f2;
+  --muted:#b3c1b7;
+  --line:#34443a;
+  --green:#79d69a;
+  --green-dark:#a0e8b7;
+  --green-soft:#183b27;
+  --red:#ff9690;
+  --red-soft:#402523;
+  --blue:#8fc5f4;
+  --amber:#f4c675;
+  --amber-soft:#40331d;
+  --shadow:0 16px 42px rgba(0,0,0,.3);
+}
+@media(prefers-color-scheme:dark){
+  :root:not([data-theme=light]){
+    --bg:#080d0a;--surface:rgba(19,27,22,.92);--surface-2:#202c24;
+    --text:#f1f7f2;--muted:#b3c1b7;--line:#34443a;
+    --green:#79d69a;--green-dark:#a0e8b7;--green-soft:#183b27;
+    --red:#ff9690;--red-soft:#402523;--blue:#8fc5f4;
+    --amber:#f4c675;--amber-soft:#40331d;--shadow:0 16px 42px rgba(0,0,0,.3);
+  }
+}
+html,body{background:var(--bg);color:var(--text)}
+body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:-.012em}
+#app{max-width:600px}
+.topbar{margin-bottom:22px}
+.brand-mark{width:39px;height:39px;border-radius:13px;box-shadow:0 5px 14px color-mix(in srgb,var(--green) 24%,transparent)}
+.brand h1{font-size:19px;letter-spacing:-.055em}
+.eyebrow,.overline{font-size:11px;letter-spacing:.12em;color:var(--muted)}
+.icon-button{border-radius:15px;background:var(--surface);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 4px 14px rgba(0,0,0,.035)}
+.page-head h2{font-size:clamp(30px,7vw,36px);letter-spacing:-.065em}
+.page-head p{font-size:14px;color:var(--muted)}
+.balance-panel{
+  border:1px solid color-mix(in srgb,var(--green) 20%,var(--line));
+  border-radius:25px;
+  background:linear-gradient(135deg,color-mix(in srgb,var(--surface) 92%,var(--green-soft)),var(--surface));
+  box-shadow:var(--shadow);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+}
+.balance-panel::after{border-color:color-mix(in srgb,var(--green) 24%,transparent)}
+.balance-top{font-size:13px;color:var(--muted)}
+.balance-panel>strong{font-size:clamp(32px,8.5vw,43px);letter-spacing:-.07em}
+.balance-foot{font-size:12px}
+.cash-summary{gap:12px;margin:23px 2px}
+.cash-summary>div{padding:13px 12px;border:1px solid var(--line);border-radius:16px;background:var(--surface)}
+.metric-label{font-size:12px;font-weight:600}
+.cash-summary strong{font-size:clamp(15px,4vw,19px)}
+.quick-actions{gap:10px}
+.quick-actions button{min-height:72px;border-radius:17px;background:var(--surface);box-shadow:0 3px 12px rgba(0,0,0,.025)}
+.quick-actions b{font-size:13px}
+.quick-actions small{font-size:12px}
+.section-title h3{font-size:19px;letter-spacing:-.05em}
+.section-title p{font-size:13px}
+.transaction-list,.wallet-total,.stat-overview,.chart-panel,.budget-summary{
+  border-radius:19px;background:var(--surface);box-shadow:0 4px 16px rgba(0,0,0,.025)
+}
+.tx-row{min-height:70px}
+.tx-copy b,.wallet-copy b{font-size:14px}
+.tx-copy small,.wallet-copy small{font-size:12px}
+.tx-amount,.wallet-row>strong{font-size:13px;font-weight:700}
+.tx-symbol,.wallet-icon{width:42px;height:42px;border-radius:14px}
+.search-box{height:50px;border-radius:15px;background:var(--surface)}
+.search-box input{font-size:14px}
+.filter{min-height:42px;border-radius:13px;font-size:13px;font-weight:600}
+.filter.active{box-shadow:inset 0 0 0 1px var(--green)}
+.wallet-row{min-height:74px;border-radius:17px;background:var(--surface)}
+.wallet-total,.stat-overview{padding:19px;border-radius:19px}
+.wallet-total span,.stat-overview span,.budget-summary span{font-size:13px}
+.wallet-total strong,.stat-overview>div:first-child strong{font-size:27px}
+.chart-panel{padding:19px}
+.bottom-nav{
+  width:min(600px,100%);
+  border:1px solid color-mix(in srgb,var(--line) 82%,transparent);
+  border-bottom:0;
+  border-radius:22px 22px 0 0;
+  background:color-mix(in srgb,var(--surface) 88%,transparent);
+  box-shadow:0 -8px 30px rgba(0,0,0,.07);
+  backdrop-filter:blur(22px) saturate(1.25);
+  -webkit-backdrop-filter:blur(22px) saturate(1.25);
+}
+.nav-item{min-height:56px;font-size:12px}
+.nav-item span{font-size:12px}
+.nav-item.active{border-radius:14px;background:var(--green-soft)}
+.fab{width:56px;height:56px;border-radius:19px;box-shadow:0 9px 22px color-mix(in srgb,var(--green) 28%,transparent)}
+dialog{border-radius:25px}
+#modal-form{padding:22px}
+.modal-head h3{font-size:23px}
+.field>span{font-size:13px}
+.field input,.field select{min-height:50px;border-radius:13px;font-size:15px}
+.primary-button,.secondary-button,.danger-button{min-height:49px;border-radius:14px;font-size:14px}
+.type-tabs button{font-size:13px}
+.category-chip{font-size:13px}
+.helper,.form-error{font-size:13px}
+#toast{font-size:13px}
+#view>*{animation:hybrid-page-in .26s var(--hybrid-ease) both}
+@keyframes hybrid-page-in{from{opacity:0;transform:translate3d(0,9px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid color-mix(in srgb,var(--green) 55%,transparent);outline-offset:2px}
+button{transition:transform .18s var(--hybrid-ease),background-color .18s,border-color .18s,box-shadow .18s}
+@media(max-width:390px){
+  #app{padding-inline:16px}
+  .cash-summary>div{padding:11px 9px}
+  .metric-label{font-size:11px}
+  .quick-actions b{font-size:12px}
+}
+@media(prefers-reduced-motion:reduce){
+  #view>*{animation:none!important}
+  .bottom-nav,.balance-panel,.icon-button{backdrop-filter:none;-webkit-backdrop-filter:none}
+}
