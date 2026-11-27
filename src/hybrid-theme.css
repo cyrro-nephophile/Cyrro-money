@@ -644,3 +644,26 @@ dialog[open]::backdrop{animation:mamoney-backdrop-in .2s ease-out both}
 @media(prefers-reduced-motion:reduce){
   #modal-content .settings-section .secondary-button{transition:none!important}
 }
+
+
+/* Settings: give section borders more breathing room from their contents. */
+#modal-content .settings-section{
+  padding:20px 19px;
+  gap:13px;
+}
+#modal-content .settings-section .helper{
+  margin-top:-2px;
+  margin-bottom:4px;
+}
+#modal-content .settings-section .field{
+  gap:9px;
+}
+#modal-content .settings-section .secondary-button{
+  margin-top:2px;
+}
+@media(max-width:380px){
+  #modal-content .settings-section{
+    padding:16px;
+    gap:12px;
+  }
+}
