@@ -74,6 +74,16 @@ export function calculateAccountBalances(accounts, transactions) {
   return balances;
 }
 
+export function sumSafeIntegers(values, label = 'Total') {
+  let total = 0;
+  for (const value of values) {
+    if (!Number.isSafeInteger(value)) throw new TypeError(label + ' harus berupa bilangan Rupiah yang aman.');
+    total += value;
+    if (!Number.isSafeInteger(total)) throw new RangeError(label + ' melebihi batas angka aman JavaScript.');
+  }
+  return total;
+}
+
 export function summarizeTransactions(transactions) {
   let income = 0;
   let expense = 0;
