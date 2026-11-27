@@ -536,3 +536,111 @@ dialog[open]::backdrop{animation:mamoney-backdrop-in .2s ease-out both}
 @media(prefers-reduced-motion:reduce){
   #view .bar-item>i em{animation:none!important}
 }
+
+
+/* Settings modal polish: grouped controls, clear hierarchy, safer backup actions. */
+#modal-content .settings-section{
+  display:grid;
+  gap:11px;
+  margin:17px 0;
+  padding:16px;
+  border:1px solid var(--line);
+  border-radius:17px;
+  background:var(--surface);
+}
+#modal-content .settings-section>b{
+  display:block;
+  color:var(--text);
+  font-size:14px;
+  font-weight:800;
+  letter-spacing:-.02em;
+}
+#modal-content .settings-section .helper{
+  margin:-4px 0 2px;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.55;
+}
+#modal-content .settings-section .field{
+  display:grid;
+  gap:7px;
+  margin:0;
+}
+#modal-content .settings-section .field>span{
+  color:var(--muted);
+  font-size:11px;
+  font-weight:700;
+}
+#modal-content .settings-section .field select{
+  width:100%;
+  min-width:0;
+  min-height:48px;
+  padding:0 13px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:var(--surface-2);
+  color:var(--text);
+  font-size:13px;
+}
+#modal-content .settings-section .secondary-button{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  min-height:47px;
+  padding:10px 13px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:var(--surface-2);
+  color:var(--text);
+  font-size:12px;
+  font-weight:750;
+  text-align:center;
+}
+#modal-content .settings-section .secondary-button:active{
+  background:var(--green-soft);
+  border-color:color-mix(in srgb,var(--green) 35%,var(--line));
+}
+#modal-content .settings-section.about{
+  gap:7px;
+  border-color:transparent;
+  background:var(--surface-2);
+}
+#modal-content .settings-section.about p{
+  margin:0;
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.6;
+}
+#modal-content .settings-category-entry{
+  border-color:color-mix(in srgb,var(--green) 24%,var(--line));
+  background:color-mix(in srgb,var(--green-soft) 48%,var(--surface));
+}
+#modal-content .settings-category-entry .secondary-button{
+  border-color:color-mix(in srgb,var(--green) 25%,var(--line));
+  background:var(--green-soft);
+  color:var(--green-dark);
+}
+#modal-content .settings-section .file-button{
+  position:relative;
+  cursor:pointer;
+}
+#modal-content .settings-section .file-button input{
+  position:absolute;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+  clip:rect(0,0,0,0);
+  white-space:nowrap;
+}
+#modal-content .settings-section .file-button:focus-within{
+  outline:3px solid color-mix(in srgb,var(--green) 18%,transparent);
+  outline-offset:2px;
+}
+@media(max-width:380px){
+  #modal-content .settings-section{gap:10px;margin:14px 0;padding:13px}
+  #modal-content .settings-section .secondary-button{min-height:45px}
+}
+@media(prefers-reduced-motion:reduce){
+  #modal-content .settings-section .secondary-button{transition:none!important}
+}
