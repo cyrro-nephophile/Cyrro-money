@@ -410,3 +410,40 @@ a:focus-visible{
   outline-offset:3px;
   border-radius:4px;
 }
+
+
+/* Form readability pass: clearer labels and values without adding color fills. */
+#modal-content .field>span{
+  font-size:13px;
+  line-height:1.4;
+}
+#modal-content .field input,
+#modal-content .field select,
+#modal-content .budget-input-row input{
+  font-size:15px;
+}
+#modal-content .amount-input{
+  min-height:54px;
+  font-size:20px;
+  font-weight:700;
+  font-variant-numeric:tabular-nums;
+}
+#modal-content .type-tabs button{
+  font-size:13px;
+}
+#modal-content .helper,
+#modal-content .selected-category{
+  font-size:13px;
+  line-height:1.55;
+}
+#modal-content .budget-input-row{
+  font-size:13px;
+}
+#modal-content .picker-trigger{
+  font-size:15px;
+}
+#modal-content .modal-actions button,
+#modal-content .primary-button,
+#modal-content .secondary-button{
+  font-size:13px;
+}
