@@ -390,3 +390,149 @@ dialog[open]::backdrop{animation:mamoney-backdrop-in .2s ease-out both}
 @media(prefers-reduced-motion:reduce){
   #view .wallet-row,#view .wallet-heading .text-link{transition:none}
 }
+
+
+/* Statistics page polish: clearer chart rhythm and grouped budget details. */
+#view .stat-overview{
+  gap:16px;
+  padding:20px;
+  border-radius:21px;
+}
+#view .stat-overview>div:first-child>span,
+#view .budget-summary>div>span{
+  display:block;
+  margin-bottom:7px;
+  color:var(--muted);
+  font-size:12px;
+  font-weight:650;
+  line-height:1.4;
+}
+#view .stat-overview>div:first-child strong{
+  letter-spacing:-.06em;
+  line-height:1.18;
+}
+#view .chart-panel{
+  padding:19px 17px 16px;
+}
+#view .bar-item{
+  display:grid;
+  gap:10px;
+  margin:0 0 20px;
+}
+#view .bar-item:last-of-type{margin-bottom:15px}
+#view .bar-item>div{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  color:var(--muted);
+  font-size:12px;
+  font-weight:650;
+}
+#view .bar-item>div b{
+  color:var(--text);
+  font-size:13px;
+  font-weight:800;
+}
+#view .bar-item>i{
+  display:block;
+  width:100%;
+  height:11px;
+  overflow:hidden;
+  border-radius:999px;
+  background:var(--surface-2);
+}
+#view .bar-item>i em{
+  display:block;
+  height:100%;
+  min-width:0;
+  border-radius:inherit;
+  transform-origin:left center;
+  animation:mamoney-bar-in .55s var(--v2-ease) both;
+}
+#view .bar-item>i .income-bar{background:linear-gradient(90deg,#249b5b,#54bd7c)}
+#view .bar-item>i .expense-bar{background:linear-gradient(90deg,#d65d55,#ee8a70)}
+#view .chart-panel>small{
+  display:block;
+  padding-top:12px;
+  border-top:1px solid var(--line);
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.5;
+}
+#view .budget-summary{
+  gap:14px;
+  padding:18px;
+}
+#view .budget-summary>div strong{
+  font-size:clamp(16px,4.4vw,19px);
+  letter-spacing:-.035em;
+}
+#view .budget-summary .budget-track{
+  grid-column:1/-1;
+  height:10px;
+  overflow:hidden;
+  border-radius:999px;
+  background:var(--surface-2);
+}
+#view .budget-summary .budget-track i{
+  display:block;
+  height:100%;
+  border-radius:inherit;
+  background:var(--green);
+}
+#view .budget-summary>small{
+  grid-column:1/-1;
+  margin-top:-7px;
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.45;
+}
+#view .budget-row{
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  gap:9px;
+  margin-top:5px;
+  padding:15px 13px;
+  border:1px solid var(--line);
+  border-radius:15px;
+  background:var(--surface);
+}
+#view .budget-row>div{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:10px;
+}
+#view .budget-row>div b{font-size:13px;font-weight:750}
+#view .budget-row>div span{font-size:12px;font-weight:700}
+#view .budget-row .budget-track{
+  display:block;
+  width:100%;
+  height:8px;
+  overflow:hidden;
+  border-radius:999px;
+  background:var(--surface-2);
+}
+#view .budget-row .budget-track em{
+  display:block;
+  height:100%;
+  border-radius:inherit;
+  background:var(--green);
+}
+#view .budget-row .budget-track em.warn{background:var(--amber)}
+#view .budget-row .budget-track em.over{background:var(--red)}
+#view .budget-row>small{
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.4;
+}
+@keyframes mamoney-bar-in{from{transform:scaleX(.04);opacity:.65}to{transform:scaleX(1);opacity:1}}
+@media(max-width:390px){
+  #view .chart-panel{padding:17px 14px 14px}
+  #view .budget-summary{gap:11px;padding:15px}
+  #view .budget-row{padding:13px 11px}
+}
+@media(prefers-reduced-motion:reduce){
+  #view .bar-item>i em{animation:none!important}
+}
