@@ -4,6 +4,12 @@ import { calculateAccountBalances, summarizeTransactions, sumSafeIntegers, forma
 import { DEFAULT_CATEGORIES, getAvailableCategories, validateCategory, archiveCategory, restoreCategory } from './core/finance/categories.js';
 
 const $ = (s, r=document) => r.querySelector(s);
+
+// Hide financial details in the app-switcher snapshot; restore them when the app is visible again.
+function syncPrivacyShield(){document.body.classList.toggle('privacy-shield',document.visibilityState==='hidden')}
+document.addEventListener('visibilitychange',syncPrivacyShield);
+window.addEventListener('pagehide',()=>document.body.classList.add('privacy-shield'));
+window.addEventListener('pageshow',syncPrivacyShield);
 const view=$('#view'), modal=$('#modal'), modalContent=$('#modal-content'), toastNode=$('#toast');
 let db, page='home', accounts=[], transactions=[], categories=[], budgets=[], settings={theme:'system',language:'id'}, toastTimer;
 let lockedPageScrollY=0, pageScrollLocked=false, pickerCloseTimer=null;
