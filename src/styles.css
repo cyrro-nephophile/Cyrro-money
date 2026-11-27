@@ -283,3 +283,44 @@ dialog#picker-layer .sheet-options{max-height:calc(82dvh - 112px);overflow-y:aut
 /* Critical: a closed native dialog must not cover the application. */
 dialog#picker-layer:not([open]){display:none!important;pointer-events:none!important}
 dialog#picker-layer[open]{display:block;pointer-events:auto}
+
+
+/* ===== Motion pass: lebih luwes, nggak kaku ===== */
+:root{--spring-soft:cubic-bezier(.22,.9,.3,1);--sheet-ease:cubic-bezier(.32,.72,0,1)}
+
+/* Tab Keluar/Masuk/Transfer: pill-nya meluncur ke tab yang dipilih */
+.type-tabs{position:relative;isolation:isolate}
+.type-tabs::before{
+  content:"";position:absolute;top:4px;bottom:4px;left:4px;z-index:0;
+  width:calc((100% - 20px) / 3);border-radius:10px;
+  background:var(--surface);box-shadow:0 1px 4px rgba(0,0,0,.08);
+  transform:translateX(calc(var(--i,0) * (100% + 6px)));
+  transition:transform .36s var(--spring-soft);
+}
+.type-tabs:has(button:nth-child(2).chosen){--i:1}
+.type-tabs:has(button:nth-child(3).chosen){--i:2}
+.type-tabs button{position:relative;z-index:1;transition:color .24s ease}
+.type-tabs button.chosen{background:transparent;box-shadow:none}
+
+/* Bottom sheet pilihan dompet/kategori: geser lebih halus */
+#picker-layer .picker-sheet,
+dialog.transaction-sheet{transition:transform .36s var(--sheet-ease)}
+#picker-layer .picker-backdrop{transition:opacity .3s ease}
+
+/* List transaksi muncul berurutan */
+@keyframes row-in{from{opacity:0;transform:translate3d(0,10px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
+.transaction-list .tx-row{animation:row-in .34s var(--spring-soft) both}
+.transaction-list .tx-row:nth-child(1){animation-delay:.00s}
+.transaction-list .tx-row:nth-child(2){animation-delay:.04s}
+.transaction-list .tx-row:nth-child(3){animation-delay:.08s}
+.transaction-list .tx-row:nth-child(4){animation-delay:.12s}
+.transaction-list .tx-row:nth-child(5){animation-delay:.16s}
+.transaction-list .tx-row:nth-child(n+6){animation-delay:.2s}
+
+/* Pilihan sheet ikut "terpencet" saat disentuh */
+.sheet-option,.wallet-row,.quick-actions button{transition:transform .2s var(--spring-soft),background-color .2s,border-color .2s,box-shadow .2s}
+.sheet-option:active,.wallet-row:active{transform:scale(.98)}
+
+@media(prefers-reduced-motion:reduce){
+  .type-tabs::before,.type-tabs button,.transaction-list .tx-row{transition:none!important;animation:none!important}
+}
