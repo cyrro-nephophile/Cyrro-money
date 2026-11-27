@@ -855,3 +855,8 @@ dialog[open]::backdrop{animation:mamoney-backdrop-in .2s ease-out both}
 @media(max-width:380px){
   .brand h1{font-size:24px;letter-spacing:-1.15px}
 }
+
+/* Semantic budget status: the aggregate indicator follows the same thresholds as category rows. */
+#view .budget-summary .budget-track>i.warn{background:var(--amber)}
+#view .budget-summary .budget-track>i.approach{background:color-mix(in srgb,var(--amber) 72%,var(--green))}
+#view .budget-summary .budget-track>i.over{background:var(--red)}
