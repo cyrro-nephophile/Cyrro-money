@@ -21,6 +21,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
       - name: Verify release version
         if: startsWith(github.ref, 'refs/tags/v')
         shell: bash
@@ -31,11 +36,6 @@ jobs:
             echo "Tag $TAG_VERSION does not match package.json version $PACKAGE_VERSION"
             exit 1
           fi
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
 
       - name: Setup Java
         uses: actions/setup-java@v4
