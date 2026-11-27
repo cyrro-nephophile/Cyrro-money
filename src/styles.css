@@ -1,4 +1,4 @@
-:root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;font-synthesis:none;text-rendering:optimizeLegibility;font-optical-sizing:auto;color-scheme:light;--bg:#ffffff;--surface:#ffffff;--surface-2:#f5f6f5;--text:#171b18;--muted:#747b76;--line:#e7e9e7;--green:#23834a;--green-dark:#176b39;--green-soft:#eaf4ed;--red:#c84f4b;--red-soft:#f9eceb;--blue:#3976b8;--amber:#a96d16;--amber-soft:#fbf2df;--shadow:0 12px 32px rgba(0,0,0,.07)}
+:root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;font-synthesis:none;text-rendering:optimizeLegibility;font-optical-sizing:auto;color-scheme:light;--bg:#ffffff;--surface:#ffffff;--surface-2:#f5f6f5;--text:#171b18;--muted:#686f69;--line:#e7e9e7;--green:#176b39;--green-dark:#105f34;--green-soft:#eaf4ed;--red:#b83f3b;--red-soft:#f9eceb;--blue:#3976b8;--amber:#94600f;--amber-soft:#fbf2df;--shadow:0 12px 32px rgba(0,0,0,.07)}
 :root[data-theme=dark]{color-scheme:dark;--bg:#000000;--surface:#090909;--surface-2:#141414;--text:#f5f5f5;--muted:#a1a1a1;--line:#292929;--green:#70c98a;--green-dark:#91dda5;--green-soft:#102417;--red:#ff8984;--red-soft:#321d1c;--blue:#8bbcf0;--amber:#f0bf69;--amber-soft:#302719;--shadow:0 14px 34px rgba(0,0,0,.48)}
 @media(prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#000000;--surface:#090909;--surface-2:#141414;--text:#f5f5f5;--muted:#a1a1a1;--line:#292929;--green:#70c98a;--green-dark:#91dda5;--green-soft:#102417;--red:#ff8984;--red-soft:#321d1c;--blue:#8bbcf0;--amber:#f0bf69;--amber-soft:#302719;--shadow:0 14px 34px rgba(0,0,0,.48)}}
 *{box-sizing:border-box}html{min-width:320px;background:var(--bg)}body{margin:0;min-height:100vh;background:var(--bg);color:var(--text)}button,input,select{font:inherit}button{cursor:pointer;color:inherit;-webkit-tap-highlight-color:transparent}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid color-mix(in srgb,var(--green) 55%,transparent);outline-offset:2px}
@@ -323,4 +323,127 @@ dialog.transaction-sheet{transition:transform .36s var(--sheet-ease)}
 
 @media(prefers-reduced-motion:reduce){
   .type-tabs::before,.type-tabs button,.transaction-list .tx-row{transition:none!important;animation:none!important}
+}
+
+/* Home cash summary: add breathing room inside the existing cards only. */
+.cash-summary>div{padding:9px 10px;border:1px solid var(--line);border-radius:17px;background:var(--surface)}
+@media(max-width:390px){.cash-summary>div{padding:8px 9px}}
+
+
+/* Final wordmark override: keep typography visible above base header styles. */
+.topbar .brand h1{
+  margin:0;
+  color:var(--text);
+  font-family:"Plus Jakarta Sans",Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:26px;
+  font-weight:800;
+  line-height:1;
+  letter-spacing:-1.35px;
+  font-kerning:normal;
+  font-feature-settings:"kern" 1;
+}
+.topbar .brand-root,
+.topbar .brand-accent{
+  color:inherit;
+  font:inherit;
+  letter-spacing:inherit;
+}
+@media(max-width:380px){
+  .topbar .brand h1{font-size:25px;letter-spacing:-1.25px}
+}
+
+
+/* Component consistency pass: shared focus, disabled, and form-control states. */
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible{
+  outline:3px solid color-mix(in srgb,var(--green) 72%,transparent);
+  outline-offset:2px;
+}
+#view .search-box input:focus-visible{
+  outline:2px solid var(--green);
+  outline-offset:1px;
+  border-radius:5px;
+  background:transparent;
+}
+#view .filter-extra select:focus-visible,
+#view .filter-extra input:focus-visible,
+#modal-content .field input:focus-visible,
+#modal-content .field select:focus-visible,
+#modal-content .budget-input-row input:focus-visible{
+  border-color:var(--green);
+  box-shadow:0 0 0 2px color-mix(in srgb,var(--green) 14%,transparent);
+}
+button:disabled,
+input:disabled,
+select:disabled,
+textarea:disabled{
+  cursor:not-allowed;
+  opacity:.56;
+}
+button:disabled:active{transform:none}
+#modal-content .field input,
+#modal-content .field select,
+#modal-content .budget-input-row input,
+#view .filter-extra input,
+#view .filter-extra select{
+  color-scheme:inherit;
+}
+
+
+/* Accessibility pass: comfortable touch targets for compact controls. */
+.more,
+.close-modal,
+.sheet-close{
+  min-width:44px;
+  min-height:44px;
+}
+.filter,
+.category-all,
+.category-manage-tabs button,
+#modal-content .manage-row>button{
+  min-height:44px;
+}
+a:focus-visible{
+  outline:2px solid var(--green);
+  outline-offset:3px;
+  border-radius:4px;
+}
+
+
+/* Form readability pass: clearer labels and values without adding color fills. */
+#modal-content .field>span{
+  font-size:13px;
+  line-height:1.4;
+}
+#modal-content .field input,
+#modal-content .field select,
+#modal-content .budget-input-row input{
+  font-size:15px;
+}
+#modal-content .amount-input{
+  min-height:54px;
+  font-size:20px;
+  font-weight:700;
+  font-variant-numeric:tabular-nums;
+}
+#modal-content .type-tabs button{
+  font-size:13px;
+}
+#modal-content .helper,
+#modal-content .selected-category{
+  font-size:13px;
+  line-height:1.55;
+}
+#modal-content .budget-input-row{
+  font-size:13px;
+}
+#modal-content .picker-trigger{
+  font-size:15px;
+}
+#modal-content .modal-actions button,
+#modal-content .primary-button,
+#modal-content .secondary-button{
+  font-size:13px;
 }
