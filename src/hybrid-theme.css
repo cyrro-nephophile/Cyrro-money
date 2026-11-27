@@ -833,3 +833,25 @@ dialog[open]::backdrop{animation:mamoney-backdrop-in .2s ease-out both}
   .brand h1{font-size:24px;letter-spacing:-1.45px}
   .brand-accent{letter-spacing:-1.65px}
 }
+
+
+/* Wordmark typography: one consistent color, refined modern letterforms. */
+.brand h1{
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:25px;
+  font-weight:760;
+  letter-spacing:-1.25px;
+  line-height:1;
+  color:var(--text);
+  font-kerning:normal;
+  font-feature-settings:"kern" 1;
+}
+.brand-root,.brand-accent{
+  color:inherit;
+  font-weight:inherit;
+  letter-spacing:inherit;
+}
+:root[data-theme=dark] .brand-accent{color:inherit}
+@media(max-width:380px){
+  .brand h1{font-size:24px;letter-spacing:-1.15px}
+}
