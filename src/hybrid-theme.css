@@ -667,3 +667,133 @@ dialog[open]::backdrop{animation:mamoney-backdrop-in .2s ease-out both}
     gap:12px;
   }
 }
+
+
+/* Category manager: clearer segmented tabs and individually readable category rows. */
+#modal-content:has(.category-manage-tabs){
+  display:block;
+}
+#modal-content .category-manage-tabs{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:7px;
+  margin:16px 0 13px;
+  padding:5px;
+  border:1px solid var(--line);
+  border-radius:15px;
+  background:var(--surface-2);
+}
+#modal-content .category-manage-tabs button{
+  min-width:0;
+  min-height:43px;
+  padding:9px 8px;
+  border:1px solid transparent;
+  border-radius:11px;
+  background:transparent;
+  color:var(--muted);
+  font-size:12px;
+  font-weight:700;
+  transition:background-color .18s,border-color .18s,color .18s,box-shadow .18s;
+}
+#modal-content .category-manage-tabs button.selected{
+  border-color:color-mix(in srgb,var(--green) 22%,var(--line));
+  background:var(--surface);
+  color:var(--green-dark);
+  box-shadow:0 2px 8px rgba(20,45,28,.06);
+}
+#modal-content [data-action="add-category"]{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  width:100%;
+  min-height:49px;
+  border-radius:14px;
+  font-weight:750;
+}
+#modal-content #category-manage-list{
+  display:grid;
+  gap:8px;
+  min-width:0;
+}
+#modal-content #category-manage-list .manage-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  min-width:0;
+  min-height:62px;
+  padding:10px 11px;
+  border:1px solid var(--line);
+  border-radius:15px;
+  background:var(--surface);
+  transition:border-color .18s,background-color .18s,transform .18s;
+}
+#modal-content #category-manage-list .manage-category-name{
+  flex:1;
+  min-width:0;
+  gap:11px;
+}
+#modal-content #category-manage-list .manage-category-name>i{
+  width:39px;
+  height:39px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:var(--surface-2);
+  color:var(--green-dark);
+}
+#modal-content #category-manage-list .manage-category-name>span{
+  min-width:0;
+  overflow-wrap:anywhere;
+  color:var(--text);
+  font-size:13px;
+  font-weight:700;
+  line-height:1.35;
+}
+#modal-content #category-manage-list .manage-category-name small{
+  display:inline-flex;
+  width:max-content;
+  max-width:100%;
+  margin-top:3px;
+  padding:3px 7px;
+  border-radius:7px;
+  background:var(--surface-2);
+  color:var(--muted);
+  font-size:10px;
+  font-weight:650;
+}
+#modal-content #category-manage-list .manage-row>button{
+  flex:none;
+  min-height:36px;
+  padding:7px 10px;
+  border:1px solid color-mix(in srgb,var(--green) 24%,var(--line));
+  border-radius:10px;
+  background:var(--green-soft);
+  color:var(--green-dark);
+  font-size:11px;
+  font-weight:750;
+}
+#modal-content #category-manage-list .manage-row>button:active{
+  transform:scale(.97);
+}
+#modal-content #category-manage-list .manage-row:has(small){
+  background:color-mix(in srgb,var(--surface-2) 38%,var(--surface));
+}
+#modal-content #category-manage-list .empty{
+  margin-top:3px;
+  padding:27px 12px;
+  border:1px dashed var(--line);
+  border-radius:15px;
+  background:var(--surface-2);
+}
+@media(max-width:380px){
+  #modal-content .category-manage-tabs{margin:14px 0 11px}
+  #modal-content #category-manage-list .manage-row{gap:7px;padding:9px}
+  #modal-content #category-manage-list .manage-category-name{gap:8px}
+  #modal-content #category-manage-list .manage-category-name>i{width:36px;height:36px}
+  #modal-content #category-manage-list .manage-row>button{padding-inline:8px}
+}
+@media(prefers-reduced-motion:reduce){
+  #modal-content .category-manage-tabs button,
+  #modal-content #category-manage-list .manage-row{transition:none}
+}
