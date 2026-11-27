@@ -362,9 +362,10 @@ textarea:focus-visible{
   outline-offset:2px;
 }
 #view .search-box input:focus-visible{
-  outline:3px solid color-mix(in srgb,var(--blue) 72%,transparent);
+  outline:2px solid var(--green);
   outline-offset:1px;
   border-radius:5px;
+  background:transparent;
 }
 #view .filter-extra select:focus-visible,
 #view .filter-extra input:focus-visible,
