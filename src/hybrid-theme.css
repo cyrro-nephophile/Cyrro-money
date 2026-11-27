@@ -132,3 +132,18 @@ button{transition:transform .18s var(--v2-ease),background-color .18s,border-col
   .stat-overview .stat-mini{grid-template-columns:minmax(0,1fr) minmax(0,max-content);gap:8px 10px}
   .stat-overview .stat-mini b{font-size:12px}
 }
+
+/* Motion polish: restrained navigation feedback and a softer modal entrance. */
+.nav-item{transition:background-color .2s var(--v2-ease),color .2s var(--v2-ease),transform .18s var(--v2-ease)}
+.nav-item span{transition:transform .2s var(--v2-ease)}
+.nav-item.active span{transform:translateY(-1px)}
+.icon-button,.close-modal,.secondary-button,.primary-button,.quick-actions button{transition:transform .18s var(--v2-ease),background-color .2s,border-color .2s,box-shadow .2s}
+dialog[open]{animation:mamoney-modal-in .24s var(--v2-ease) both}
+dialog[open]::backdrop{animation:mamoney-backdrop-in .2s ease-out both}
+@keyframes mamoney-modal-in{from{opacity:0;transform:translateY(10px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes mamoney-backdrop-in{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){
+ .nav-item,.nav-item span,.icon-button,.close-modal,.secondary-button,.primary-button,.quick-actions button{transition:none!important}
+ .nav-item.active span{transform:none}
+ dialog[open],dialog[open]::backdrop{animation:none!important}
+}
