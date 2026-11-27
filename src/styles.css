@@ -351,3 +351,41 @@ dialog.transaction-sheet{transition:transform .36s var(--sheet-ease)}
 @media(max-width:380px){
   .topbar .brand h1{font-size:25px;letter-spacing:-1.25px}
 }
+
+
+/* Component consistency pass: shared focus, disabled, and form-control states. */
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible{
+  outline:3px solid color-mix(in srgb,var(--blue) 72%,transparent);
+  outline-offset:2px;
+}
+#view .search-box input:focus-visible{
+  outline:3px solid color-mix(in srgb,var(--blue) 72%,transparent);
+  outline-offset:1px;
+  border-radius:5px;
+}
+#view .filter-extra select:focus-visible,
+#view .filter-extra input:focus-visible,
+#modal-content .field input:focus-visible,
+#modal-content .field select:focus-visible,
+#modal-content .budget-input-row input:focus-visible{
+  border-color:var(--blue);
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--blue) 16%,transparent);
+}
+button:disabled,
+input:disabled,
+select:disabled,
+textarea:disabled{
+  cursor:not-allowed;
+  opacity:.56;
+}
+button:disabled:active{transform:none}
+#modal-content .field input,
+#modal-content .field select,
+#modal-content .budget-input-row input,
+#view .filter-extra input,
+#view .filter-extra select{
+  color-scheme:inherit;
+}
