@@ -16,6 +16,7 @@ export function openDatabase() {
     }
 
     const request = indexedDB.open(DB_NAME, DB_VERSION);
+    let wasBlocked = false;
 
     request.onupgradeneeded = () => {
       const db = request.result;
@@ -43,10 +44,19 @@ export function openDatabase() {
     request.onsuccess = () => {
       const db = request.result;
       db.onversionchange = () => db.close();
+      // A blocked open may eventually succeed after another tab closes. Do not
+      // leave an unowned connection open after the caller has already failed.
+      if (wasBlocked) {
+        db.close();
+        return;
+      }
       resolve(db);
     };
 
     request.onerror = () => reject(request.error ?? new Error('Unable to open database.'));
-    request.onblocked = () => reject(new Error('Database upgrade is blocked by another tab.'));
+    request.onblocked = () => {
+      wasBlocked = true;
+      reject(new Error('Pembaruan penyimpanan tertahan tab Mamoney lain. Tutup tab Mamoney lainnya, lalu muat ulang aplikasi.'));
+    };
   });
 }
