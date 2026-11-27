@@ -85,3 +85,31 @@ button{transition:transform .18s var(--v2-ease),background-color .18s,border-col
 @media(max-width:390px){
   .cash-summary>div{padding:12px 13px}
 }
+
+/* Statistics: long currency values must wrap without pushing cards off-screen. */
+.stat-overview{min-width:0;align-items:flex-start;flex-wrap:wrap}
+.stat-overview>div:first-child{flex:1 1 145px;min-width:0}
+.stat-overview>div:first-child strong{display:block;max-width:100%;overflow-wrap:anywhere;word-break:normal;font-variant-numeric:tabular-nums;line-height:1.2}
+.stat-mini{flex:1 1 125px;min-width:0;grid-template-columns:minmax(0,1fr) minmax(0,auto);align-items:center}
+.stat-mini span,.stat-mini b{min-width:0;overflow-wrap:anywhere;word-break:normal}
+.stat-mini b{text-align:right;font-variant-numeric:tabular-nums;line-height:1.25}
+.chart-panel,.budget-summary,.budget-row{min-width:0;max-width:100%}
+.bar-item>div{display:flex;align-items:flex-start;flex-wrap:wrap;min-width:0;gap:5px 12px;line-height:1.35}
+.bar-item>div span{flex:1 1 90px;min-width:0}
+.bar-item>div b{flex:0 1 auto;min-width:0;max-width:100%;overflow-wrap:anywhere;text-align:right;font-variant-numeric:tabular-nums}
+.budget-summary{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.budget-summary>div:not(.budget-track){min-width:0}
+.budget-summary strong{display:block;max-width:100%;overflow-wrap:anywhere;line-height:1.25;font-variant-numeric:tabular-nums}
+.budget-summary small{overflow-wrap:anywhere;line-height:1.4}
+.budget-row>div{display:flex;align-items:flex-start;flex-wrap:wrap;min-width:0;gap:5px 12px;line-height:1.35}
+.budget-row>div b{flex:1 1 75px;min-width:0;overflow-wrap:anywhere}
+.budget-row>div span{flex:0 1 auto;min-width:0;max-width:100%;text-align:right;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+@media(max-width:390px){
+ .stat-overview{gap:12px}
+ .stat-overview>div:first-child{flex-basis:100%}
+ .stat-mini{flex-basis:100%;grid-template-columns:minmax(0,1fr) minmax(0,auto);gap:7px 10px}
+ .stat-mini b{font-size:12px}
+ .bar-item>div{gap:4px 8px}
+ .budget-summary{gap:10px;padding:15px}
+ .budget-row>div{gap:4px 8px}
+}
