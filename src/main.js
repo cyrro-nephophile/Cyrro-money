@@ -82,7 +82,7 @@ async function importBackup(file){
   const d=JSON.parse(await file.text());
   if(d?.app!=='Mamoney'||d.schemaVersion!==1||!['accounts','transactions','categories','budgets'].every(k=>Array.isArray(d[k])))throw Error('Format atau versi cadangan tidak didukung.');
   const unique=(items,label)=>{const ids=new Set();for(const x of items){if(!x||typeof x!=='object'||typeof x.id!=='string'||!x.id.trim()||ids.has(x.id))throw Error('ID '+label+' kosong atau duplikat.');ids.add(x.id)}return ids};
-  const accountIds=unique(d.accounts,'dompet'),categoryIds=unique(d.categories,'kategori');unique(d.transactions,'transaksi');unique(d.budgets,'anggaran');
+  if(d.accounts.length===0)throw Error('Cadangan harus memiliki minimal satu dompet.');if(d.categories.length===0)throw Error('Cadangan harus memiliki minimal satu kategori.');const accountIds=unique(d.accounts,'dompet'),categoryIds=unique(d.categories,'kategori');unique(d.transactions,'transaksi');unique(d.budgets,'anggaran');
   if(d.accounts.some(a=>typeof a.name!=='string'||!a.name.trim()||a.name.length>60||!Number.isSafeInteger(a.openingBalance)))throw Error('Data dompet tidak valid.');
   const categoryMap=new Map(d.categories.map(c=>[c.id,c])),categoryNames=new Set();
   for(const c of d.categories){if(!['income','expense'].includes(c.type)||typeof c.name!=='string'||!c.name.trim()||c.name.length>40||(c.isArchived!=null&&typeof c.isArchived!=='boolean'))throw Error('Data kategori tidak valid.');const key=c.type+':'+c.name.trim().toLocaleLowerCase('id-ID');if(categoryNames.has(key))throw Error('Nama kategori duplikat.');categoryNames.add(key)}
