@@ -888,13 +888,19 @@ dialog[open]::backdrop{animation:mamoney-backdrop-in .2s ease-out both}
 }
 
 
-/* Transaction form: clear green active state while entering values. */
+/* Transaction form: green focus indicator without tinted input backgrounds. */
 #modal-content .amount-input:focus,
 #modal-content .field input:focus,
 #modal-content .field select:focus,
 #modal-content .budget-input-row input:focus,
-#modal-content .sheet-date-wrap input:focus{
+#modal-content .sheet-date-wrap input:focus,
+#modal-content .amount-input:focus-visible,
+#modal-content .field input:focus-visible,
+#modal-content .field select:focus-visible,
+#modal-content .budget-input-row input:focus-visible,
+#modal-content .sheet-date-wrap input:focus-visible{
   border-color:var(--green);
-  background:var(--green-soft);
-  box-shadow:0 0 0 3px color-mix(in srgb,var(--green) 16%,transparent);
+  background:var(--surface);
+  outline-color:var(--green);
+  box-shadow:0 0 0 2px color-mix(in srgb,var(--green) 14%,transparent);
 }
