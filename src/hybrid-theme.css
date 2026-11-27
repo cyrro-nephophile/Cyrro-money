@@ -178,3 +178,116 @@ dialog[open]::backdrop{animation:mamoney-backdrop-in .2s ease-out both}
 @media(prefers-reduced-motion:reduce){
   #modal-content .amount-input{transition:none}
 }
+
+
+/* History page polish: clearer search, compact filters, and scannable rows. */
+#view .search-box{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding-inline:14px;
+  border:1px solid var(--line);
+  border-radius:15px;
+  background:var(--surface);
+  transition:border-color .18s,box-shadow .18s;
+}
+#view .search-box:focus-within{
+  border-color:color-mix(in srgb,var(--green) 58%,var(--line));
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--green) 10%,transparent);
+}
+#view .search-box input{min-width:0;min-height:48px;font-size:14px}
+#view .filter-strip{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:7px;
+  overflow:visible;
+  padding:13px 0 10px;
+}
+#view .filter{
+  min-width:0;
+  min-height:42px;
+  padding:8px 5px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:var(--surface);
+  font-size:12px;
+  font-weight:700;
+  transition:background-color .18s,border-color .18s,color .18s,transform .16s;
+}
+#view .filter.active{
+  border-color:var(--green);
+  background:var(--green-soft);
+  color:var(--green);
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--green) 14%,transparent);
+}
+#view .filter-extra{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:8px;
+  margin:2px 0 14px;
+}
+#view .filter-extra select,#view .filter-extra input{
+  box-sizing:border-box;
+  width:100%;
+  min-width:0;
+  min-height:44px;
+  padding:0 10px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:var(--surface);
+  color:var(--text);
+  font-size:12px;
+}
+#view #history-list{
+  padding:3px 14px;
+  border:1px solid var(--line);
+  border-radius:17px;
+  background:var(--surface);
+  box-shadow:var(--shadow);
+}
+#view #history-list .tx-row{
+  display:flex;
+  width:100%;
+  min-width:0;
+  align-items:center;
+  gap:11px;
+  padding:13px 0;
+  border:0;
+  border-bottom:1px solid var(--line);
+  border-radius:0;
+  background:transparent;
+  text-align:left;
+}
+#view #history-list .tx-row:last-child{border-bottom:0}
+#view #history-list .tx-copy{flex:1;min-width:0}
+#view #history-list .tx-copy b{
+  display:block;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+#view #history-list .tx-copy small{
+  display:block;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+#view #history-list .tx-amount{
+  flex:none;
+  max-width:46%;
+  overflow-wrap:anywhere;
+  text-align:right;
+  font-variant-numeric:tabular-nums;
+}
+#view #history-list .tx-row:active{background:var(--surface-2);transform:scale(.995)}
+@media(max-width:380px){
+  #view .filter-strip{gap:5px}
+  #view .filter{font-size:11px;padding-inline:3px}
+  #view .filter-extra{gap:7px}
+  #view #history-list{padding-inline:11px}
+  #view #history-list .tx-row{gap:8px}
+  #view #history-list .tx-amount{font-size:11px;max-width:48%}
+}
+@media(prefers-reduced-motion:reduce){
+  #view .search-box,#view .filter{transition:none}
+}
