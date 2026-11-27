@@ -390,3 +390,23 @@ button:disabled:active{transform:none}
 #view .filter-extra select{
   color-scheme:inherit;
 }
+
+
+/* Accessibility pass: comfortable touch targets for compact controls. */
+.more,
+.close-modal,
+.sheet-close{
+  min-width:44px;
+  min-height:44px;
+}
+.filter,
+.category-all,
+.category-manage-tabs button,
+#modal-content .manage-row>button{
+  min-height:44px;
+}
+a:focus-visible{
+  outline:2px solid var(--green);
+  outline-offset:3px;
+  border-radius:4px;
+}
