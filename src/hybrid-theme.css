@@ -797,3 +797,39 @@ dialog[open]::backdrop{animation:mamoney-backdrop-in .2s ease-out both}
   #modal-content .category-manage-tabs button,
   #modal-content #category-manage-list .manage-row{transition:none}
 }
+
+
+/* Mamoney wordmark: distinctive two-tone typography, no decorative logo clutter. */
+.brand{
+  display:flex;
+  align-items:center;
+  min-width:0;
+}
+.brand h1{
+  display:inline-flex;
+  align-items:baseline;
+  margin:0;
+  font-family:ui-rounded,"SF Pro Rounded","Arial Rounded MT Bold",system-ui,sans-serif;
+  font-size:25px;
+  line-height:1;
+  letter-spacing:-1.55px;
+  font-weight:850;
+  white-space:nowrap;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:geometricPrecision;
+}
+.brand-root{
+  color:var(--text);
+}
+.brand-accent{
+  color:var(--green);
+  font-weight:900;
+  letter-spacing:-1.75px;
+}
+:root[data-theme=dark] .brand-accent{
+  color:color-mix(in srgb,var(--green) 72%,#b6f3c9);
+}
+@media(max-width:380px){
+  .brand h1{font-size:24px;letter-spacing:-1.45px}
+  .brand-accent{letter-spacing:-1.65px}
+}
