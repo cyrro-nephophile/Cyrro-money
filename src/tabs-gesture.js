@@ -8,15 +8,19 @@ if (!document.getElementById(STYLE_ID)) {
   const style = document.createElement('style');
   style.id = STYLE_ID;
   style.textContent = `
-    :root .type-tabs { touch-action: pan-y; }
+    /* Biarkan geseran horizontal sampai ke JS; vertikal tetap buat scroll form. */
+    :root .type-tabs,
+    :root .type-tabs button { touch-action: pan-y; }
     :root .type-tabs::before {
       transform: translate3d(calc(var(--i, 0) * (100% + 6px) + var(--dx, 0px)), 0, 0);
-      transition: transform .42s cubic-bezier(.22,.9,.3,1);
-      will-change: transform;
+      transition: transform .38s cubic-bezier(.22,.9,.3,1);
     }
     :root .type-tabs.dragging::before,
     :root .type-tabs.dragging button { transition: none !important; }
     :root .type-tabs button { -webkit-user-select: none; user-select: none; }
+    /* Blur itu mahal di HP kelas menengah: matiin supaya animasi tetap 60fps. */
+    :root dialog::backdrop,
+    :root #toast { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
     @media (prefers-reduced-motion: reduce) {
       :root .type-tabs::before { transition: none; }
     }
@@ -72,7 +76,7 @@ document.addEventListener('pointermove', e => {
 
   const { step, index, max } = gesture;
   let pos = index * step + raw;
-  if (pos < 0) pos *= 0.3;                       // efek karet di ujung kiri
+  if (pos < 0) pos *= 0.3;                           // efek karet di ujung kiri
   else if (pos > max) pos = max + (pos - max) * 0.3; // efek karet di ujung kanan
   gesture.tabs.style.setProperty('--dx', (pos - index * step) + 'px');
 }, { passive: true });
