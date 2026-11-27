@@ -328,3 +328,26 @@ dialog.transaction-sheet{transition:transform .36s var(--sheet-ease)}
 /* Home cash summary: add breathing room inside the existing cards only. */
 .cash-summary>div{padding:9px 10px;border:1px solid var(--line);border-radius:17px;background:var(--surface)}
 @media(max-width:390px){.cash-summary>div{padding:8px 9px}}
+
+
+/* Final wordmark override: keep typography visible above base header styles. */
+.topbar .brand h1{
+  margin:0;
+  color:var(--text);
+  font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:26px;
+  font-weight:800;
+  line-height:1;
+  letter-spacing:-1.35px;
+  font-kerning:normal;
+  font-feature-settings:"kern" 1;
+}
+.topbar .brand-root,
+.topbar .brand-accent{
+  color:inherit;
+  font:inherit;
+  letter-spacing:inherit;
+}
+@media(max-width:380px){
+  .topbar .brand h1{font-size:25px;letter-spacing:-1.25px}
+}
