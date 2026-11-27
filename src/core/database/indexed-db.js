@@ -11,7 +11,7 @@ function createStore(db, name, options) {
 export function openDatabase() {
   return new Promise((resolve, reject) => {
     if (!('indexedDB' in globalThis)) {
-      reject(new Error('IndexedDB is not supported in this browser.'));
+      reject(new Error('Browser ini tidak mendukung penyimpanan lokal Mamoney (IndexedDB).'));
       return;
     }
 
