@@ -358,7 +358,7 @@ button:focus-visible,
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible{
-  outline:3px solid color-mix(in srgb,var(--blue) 72%,transparent);
+  outline:3px solid color-mix(in srgb,var(--green) 72%,transparent);
   outline-offset:2px;
 }
 #view .search-box input:focus-visible{
@@ -371,8 +371,8 @@ textarea:focus-visible{
 #modal-content .field input:focus-visible,
 #modal-content .field select:focus-visible,
 #modal-content .budget-input-row input:focus-visible{
-  border-color:var(--blue);
-  box-shadow:0 0 0 3px color-mix(in srgb,var(--blue) 16%,transparent);
+  border-color:var(--green);
+  box-shadow:0 0 0 2px color-mix(in srgb,var(--green) 14%,transparent);
 }
 button:disabled,
 input:disabled,
