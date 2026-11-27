@@ -106,7 +106,7 @@ async function importBackup(file){
   const ss=tx.objectStore('settings');ss.clear();ss.put({key:'preferences',value:d.settings||settings});
   await transactionDone(tx);
   closeModal();await loadSettings();await refresh();toast('Cadangan berhasil dipulihkan.');
- }catch(e){toast(e.message||'Gagal memulihkan cadangan.')}
+ }catch(e){toast(databaseErrorMessage(e))}
 }
 async function saveBudget(){const inputs=modalContent.querySelectorAll('[data-budget-id]'),writes=[];for(const input of inputs){const amount=Number(input.value||0);if(!Number.isSafeInteger(amount)||amount<0){toast('Nominal anggaran harus Rupiah bulat dan tidak negatif.');return}const id=input.dataset.budgetId,old=budgetFor(id);if(amount===0){if(old)writes.push({kind:'remove',id:old.id})}else writes.push({kind:'put',value:{id:old?.id||uid(),categoryId:id,period:monthKey(),amount,updatedAt:Date.now()}})}const tx=db.transaction('budgets','readwrite'),s=tx.objectStore('budgets');for(const w of writes)w.kind==='remove'?s.delete(w.id):s.put(w.value);await transactionDone(tx);closeModal();await refresh();toast('Anggaran diperbarui.')}
 async function loadSettings(){const v=await req(store('settings').get('preferences'));if(v?.value){if(typeof v.value!=='object'||!['system','light','dark'].includes(v.value.theme)||!['id','en'].includes(v.value.language))throw new Error('Pengaturan tersimpan tidak valid. Data tetap dipertahankan.');settings={...settings,...v.value}}applyTheme()}
