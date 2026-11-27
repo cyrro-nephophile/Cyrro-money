@@ -324,3 +324,7 @@ dialog.transaction-sheet{transition:transform .36s var(--sheet-ease)}
 @media(prefers-reduced-motion:reduce){
   .type-tabs::before,.type-tabs button,.transaction-list .tx-row{transition:none!important;animation:none!important}
 }
+
+/* Home cash summary: add breathing room inside the existing cards only. */
+.cash-summary>div{padding:9px 10px;border:1px solid var(--line);border-radius:17px;background:var(--surface)}
+@media(max-width:390px){.cash-summary>div{padding:8px 9px}}
